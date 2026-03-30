@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijayachandar Sanikal | AI & Thermal Systems Leader</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'bounce-slow': 'bounce-slow 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'bounce-slow': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- React and Babel CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        /**
+         * =====================================================================
+         * CONTENT MANAGEMENT HUB (DATA OBJECT)
+         * Image paths now point to your numeric folder structure.
+         * Rename your image files to match the filenames below.
+         * =====================================================================
+         */
+        const DATA = {
+            name: "Vijayachandar Sanikal",
+            titles: ["Product Owner – AI Simulation", "Thermal Simulation Integration Engineer", "Senior Member IEEE"],
+            summary: "I am a seasoned product leader and automotive innovator with over 20 years of experience. My core passion lies in optimizing thermal systems for Battery Electric Vehicles (BEVs), Hybrid Vehicles, and Software-Defined Vehicles (SDVs), where I blend AI/ML, Virtual Validation, and Big Data to create safer, more efficient driving experiences.",
+            
+            // Folder: assets/01_profile/
+            headshotUrl: "./assets/01_profile/headshot.jpg", 
+            
+            biography: {
+                text: "My professional journey began in traditional automotive engineering and has evolved through senior roles such as CAE Engineer, Sr. CFD Engineer, and Vehicle Integration Specialist. Today, as a Thermal Simulation Integration Engineer and Product Owner, my core work revolves around merging CAE, embedded software development, and AI/ML into a unified framework for intelligent thermal system design and validation.",
+                pedigree: "With a Master of Engineering in Automobile Technology and an MBA from Kelley Business School, I bring a rare combination of deep technical expertise and strategic product leadership. My background enables me to navigate complex system engineering problems while leading with a business-first mindset, aligning cross-functional teams with a shared vision to deliver scalable solutions.",
+                vision: "To lead the automotive industry's transition toward AI-integrated, simulation-driven development of Software-Defined Vehicles, ensuring sustainable, intelligent, and efficient mobility solutions for the future. My ambition is to expand the use of AI/ML in virtual validation, predictive modelling, and energy optimization to help the global automotive sector reduce development time, lower emissions, and enhance product quality."
+            },
+
+            experience: [
+                {
+                    company: "General Motors",
+                    role: "Thermal Simulation Integration Engineer | Product Owner - AI Simulation",
+                    period: "Nov 2021 - Present",
+                    description: "Leading development for virtual calibration, machine learning integration, and embedded control software. Engineered a cloud-based Software-in-the-Loop (SIL) framework that enables global software releases without physical prototyping."
+                },
+                {
+                    company: "Stellantis (FCA US LLC)",
+                    role: "Vehicle Integration & Thermal Systems Lead",
+                    period: "Nov 2011 - Oct 2021",
+                    description: "Led performance validation and energy optimization for high-impact programs like Ram TRX and Dodge Charger SRT Hellcat. Developed full-vehicle thermal architectures using CFD, GT-SUITE, and MATLAB/Simulink."
+                }
+            ],
+
+            publications: [
+                { 
+                    title: "Software-in-the-loop validation of electric vehicle battery systems using AI-augmented digital twins", 
+                    journal: "IJERET", 
+                    date: "Mar 2026", 
+                    doi: "10.63282/3050-922X.IJERET-V7I1P133",
+                    cite: "Sanikal, V. (2026). Software-in-the-loop validation of electric vehicle battery systems using AI-augmented digital twins. IJERET, 7(1)."
+                },
+                { 
+                    title: "Real-Time Energy and Thermal Optimization in Electric Delivery Fleets via Edge-Based Forecasting", 
+                    journal: "IJAIDSML", 
+                    date: "Jan 2026", 
+                    doi: "10.63282/3050-9262.IJAIDSML-V7I1P131",
+                    cite: "Sanikal, V. (2026). Real-Time Energy and Thermal Optimization in Electric Delivery Fleets via Edge-Based Forecasting. IJAIDSML, 7(1)."
+                },
+                { 
+                    title: "Digital Twin Architecture for Continuous Calibration of Electric Vehicle Control Systems", 
+                    journal: "JEAST", 
+                    date: "Jun 2025", 
+                    doi: "10.47363/JEAST/2025(7)322",
+                    cite: "Sanikal, v. (2025). Digital Twin Architecture for Continuous Calibration of Electric Vehicle Control Systems. JEAST, 7(322)."
+                }
+            ],
+
+            // Folder: assets/03_awards/
+            awards: [
+                {
+                    title: "Best Paper Award 2026",
+                    org: "IEEE / International Research Conference",
+                    detail: "Recognized for excellence in research for 'Software-in-the-loop validation of EV battery systems using AI-augmented digital twins'.",
+                    date: "2026",
+                    img: "./assets/03_awards/best_paper_2026.jpg",
+                    link: "#"
+                },
+                {
+                    title: "Top 1% Mentor Ranking",
+                    org: "Topmate Platform",
+                    detail: "Recognized for high-impact mentorship and contributions to the global professional community.",
+                    date: "2024",
+                    img: "./assets/03_awards/mentor_ranking.jpg",
+                    link: "#"
+                },
+                {
+                    title: "Certification of Appreciation",
+                    org: "FCA / Stellantis",
+                    detail: "Recognized for establishing Aero/Thermal simulation capabilities at the SEA offshore center.",
+                    date: "2021",
+                    img: "./assets/03_awards/fca_appreciation.jpg",
+                    link: "#"
+                }
+            ],
+
+            judging: {
+                conferenceRoles: [
+                    { org: "IMED 2026 (Malaysia)", role: "Technical Session Chair", detail: "March 6, 2026" },
+                    { org: "CSNT 2026 (Saudi Arabia)", role: "Technical Session Chair", detail: "April 6, 2026" }
+                ],
+                competitions: [
+                    { org: "SAE Baja / Formula Racing", detail: "Invited Judge (2024, 2025, 2026)" },
+                    { org: "SAE World Congress (WCX)", detail: "Invited Reviewer & Session Contributor" }
+                ],
+                hackathons: [
+                    { org: "Innovation Summit Hackathon", detail: "Lead Judge" },
+                    { org: "Raptors Hackathon", detail: "Invited Judge" }
+                ],
+                journals: [
+                    { org: "IJIRMPS", detail: "Distinguished Reviewer - 7 Papers" },
+                    { org: "IJETCSIT Netherland", detail: "Editorial Board Member - 7 Papers" },
+                    { org: "IJAIDSML", detail: "Editorial Board Member - 7 Papers" },
+                    { org: "GJCST", detail: "Honorary Peer Panel Member" }
+                ],
+                peerReview: [
+                    { org: "IEEE ICBDML (2026)", detail: "Peer Reviewer - 6 Papers" },
+                    { org: "IEEE MPCON (2026)", detail: "Peer Reviewer - 9 Papers" },
+                    { org: "IEEE TIC2026 Malaysia", detail: "Peer Reviewer - 5 Papers" },
+                    { org: "IEEE ICADAAISSC Oman", detail: "Peer Reviewer - 8 Papers" }
+                ]
+            },
+
+            memberships: {
+                // Folder: assets/02_boards/01_advisory/
+                advisory: [
+                    { org: "Harvard Business Review", role: "Advisory Board Member", detail: "Strategic contributor to the HBR community.", img: "./assets/02_boards/01_advisory/hbr_board.jpg", link: "#" },
+                    { org: "Manufacturing Data Summit US 2026", role: "Advisory Board Member", detail: "Shaping manufacturing frameworks.", img: "./assets/02_boards/01_advisory/mfg_summit.jpg", link: "#" }
+                ],
+                // Folder: assets/02_boards/02_technical/
+                technical: [
+                    { org: "SAE AI Simulation Task Force Team", role: "Standard Committee Member", detail: "Defining global standards for AI simulation.", img: "./assets/02_boards/02_technical/sae_ai.jpg", link: "#" },
+                    { org: "SAE International", role: "Associate Member", detail: "Active contributor to mobility engineering.", img: "./assets/02_boards/02_technical/sae_intl.jpg", link: "#" }
+                ],
+                // Folder: assets/02_boards/03_societies/
+                fellowship: [
+                    { org: "IEEE", role: "Senior Member", detail: "Distinguished grade reflecting significant achievements.", img: "./assets/02_boards/03_societies/ieee_senior.jpg", link: "#" },
+                    { org: "ISA", role: "Senior Member", detail: "Leadership in automation standards.", img: "./assets/02_boards/03_societies/isa_senior.jpg", link: "#" }
+                ]
+            },
+
+            speaking: {
+                // Folder: assets/05_speaking/01_keynote/
+                //"https://drive.google.com/file/d/1LgWnQZAxp3ylY7EMUUK6izeOWG37pKou/preview"//
+                keynote: [
+                    {
+                        event: "International Conference on AI & Teacher Education (ICAIATE-25)",
+                        date: "May 20, 2025",
+                        title: "Keynote Speaker",
+                        img: "./assets/05_speaking/01_keynote/Speaker_01_keynote_ISER.jpg",
+                        link: "https://drive.google.com/file/d/1LgWnQZAxp3ylY7EMUUK6izeOWG37pKou/preview"
+                    },
+                    {
+                        event: "North American Automotive Intelligent Cockpit & Smart Driving Summit",
+                        date: "Oct 15, 2025",
+                        title: "Guest Speaker",
+                        img: "./assets/05_speaking/01_keynote/Speaker_03_cockpit.jpg",
+                        link: "https://www.ecv-events.com/pub/news/detail?news_id=911"
+                    },
+                    {
+                        event: "AI,ML and Computer Vision Meetup (Voxel 51), Ann Arbor, MI", 
+                        date: "Dec 06, 2025",
+                        title: "Keynote Speaker",
+                        img: "./assets/05_speaking/01_keynote/Speaker_04_voxel51.jpg",
+                        link: "https://voxel51.com/events/ann-arbor-ai-ml-and-computer-vision-meetup-december-9-2025"
+                    },
+                    {
+                        event: "EMINSPHERE™ – Advancing Knowledge, Research & Global Collaboration. (ICMESS-26)",
+                        date: "Feb 8, 2026",
+                        title: "Keynote Speaker",
+                        img: "./assets/05_speaking/01_keynote/Speaker_05_keynote_ICMESS.jpg",
+                        link: "https://drive.google.com/file/d/1kuuH4EGePPvybGovJCRqVVn5HE_Hp-Wg/preview"
+                    },
+                    {
+                        event: "AI & BIG DATA EXPO NA 2026, San Jose McEnery Convention Center, CA",
+                        date: "May 18/19, 2026",
+                        title: "Keynote Speaker",
+                        img: "./assets/05_speaking/01_keynote/Speaker_06_techex.jpg",
+                        link: "https://www.ai-expo.net/northamerica/speaker/vijay-sanikal/"
+                    }
+                ],
+                // Folder: assets/05_speaking/02_panel/
+                panel: [
+                    {
+                        event: "Why Connectivity is the New Horsepower for the Automotive Industry (Virtual Council)",
+                        title: "Panel Speaker",
+                        detail: "WHEN THE RUBBER MEETS NETWORK APIS. WHY CONNECTIVITY IS THE NEW HORSEPOWER FOR THE AUTOMOTIVE INDUSTRY",
+                        img: "./assets/05_speaking/02_panel/Speaker_panel_01_virtual_council.jpg",
+                        link: "https://drive.google.com/file/d/1WrrPxj4IWN6Kq8uCVWXwkGAvwRfIorWn/preview"
+                    },
+                    {
+                        event: "AI & BIG DATA EXPO NA 2026, San Jose McEnery Convention Center, CA",
+                        title: "Panel Speaker",
+                        detail: "The Future of AI in Automotive Design and Simulation",
+                        img: "./assets/05_speaking/02_panel/Speaker_panel_02_cio_council.jpg",
+                        link: "#"
+                    },
+                    {
+                        event: "AI & BIG DATA EXPO NA 2026, San Jose McEnery Convention Center, CA",
+                        title: "Panel Speaker",
+                        detail: "The Future of AI in Automotive Design and Simulation",
+                        img: "./assets/05_speaking/02_panel/Speaker_panel_03_appellon.jpg",
+                        link: "#"
+                    },
+                    {
+                        event: "AI & BIG DATA EXPO NA 2026, San Jose McEnery Convention Center, CA",
+                        title: "Panel Speaker",
+                        detail: "The Future of AI in Automotive Design and Simulation",
+                        img: "./assets/05_speaking/02_panel/Speaker_panel_04_smart_manufacturing.jpg",
+                        link: "#"
+                    },
+                    {
+                        event: "AI & BIG DATA EXPO NA 2026, San Jose McEnery Convention Center, CA",
+                        title: "Panel Speaker",
+                        detail: "The Future of AI in Automotive Design and Simulation",
+                        img: "./assets/05_speaking/02_panel/Speaker_panel_05_al_silicon.jpg",
+                        link: "#"
+                    }
+                ]
+            },
+
+            // Folder: assets/04_press/ (using headshot as fallback in logic)
+            press: [
+                { 
+                    source: "THE FREE PRESS JOURNAL", 
+                    date: "Dec 2025",
+                    title: "What It Takes To Launch An EV Globally: Lessons From A Virtual Simulation Integration Lead",
+                    link: "#" 
+                },
+                { 
+                    source: "LONDON DAILY NEWS", 
+                    date: "Nov 2025",
+                    title: "AI Doesn’t Just Drive - It Calibrates: Synthetic Data Powers the Next-Gen EV Brain",
+                    link: "#" 
+                },
+                { 
+                    source: "NEWSNATION TV", 
+                    date: "Sep 2025",
+                    title: "Simulating the Heat: How Virtual Thermal Models Are Redefining Electric Vehicle Design",
+                    link: "#" 
+                },
+                { 
+                    source: "INDIAN PRINT MEDIA", 
+                    date: "Mar 2003",
+                    title: "Solar Hybrid Vehicle Proto Build: Pioneering Sustainable Mobility Solutions in Engineering",
+                    link: "#" 
+                },
+                { 
+                    source: "GM ENGINEERING NEWS", 
+                    date: "Jan 2026",
+                    title: "Cloud-Based SIL Framework: A Strategic Milestone in Virtual Validation and Software Release",
+                    link: "#" 
+                },
+                { 
+                    source: "SAE INTERNATIONAL SPOTLIGHT", 
+                    date: "Feb 2026",
+                    title: "The Intersection of AI and Thermal Systems: Navigating the Complexities of Next-Gen BEVs",
+                    link: "#" 
+                }
+            ],
+
+            skills: {
+                engineering: ["MATLAB/Simulink", "GT-SUITE", "StarCCM+", "Kuli", "NX", "HyperMesh"],
+                tech: ["AI/ML", "Digital Twins", "Cloud Computing", "Azure DevOps", "SDV", "Edge Computing"],
+                management: ["SAFe 6.0", "Product Roadmap", "Agile", "Cross-functional Leadership"]
+            }
+        };
+
+        const Icon = ({ name, size = 24, className = "" }) => {
+            useEffect(() => {
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }, [name, size, className]);
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
+
+        const App = () => {
+            const [darkMode, setDarkMode] = useState(true);
+            const [activeSection, setActiveSection] = useState('home');
+            const [copiedId, setCopiedId] = useState(null);
+            
+            // Carousel State for Press Section
+            const [pressIndex, setPressIndex] = useState(0);
+            const [visibleCount, setVisibleCount] = useState(3);
+            const [isPaused, setIsPaused] = useState(false);
+            
+            // Image Modal State
+            const [selectedImage, setSelectedImage] = useState(null);
+            const [showModal, setShowModal] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    const sections = ['home', 'about', 'experience', 'boards', 'awards', 'press', 'speaking', 'judging', 'research', 'skills'];
+                    const current = sections.find(section => {
+                        const element = document.getElementById(section);
+                        if (element) {
+                            const rect = element.getBoundingClientRect();
+                            return rect.top <= 100 && rect.bottom >= 100;
+                        }
+                        return false;
+                    });
+                    if (current) setActiveSection(current);
+                };
+                
+                const handleResize = () => {
+                    if (window.innerWidth < 640) setVisibleCount(1);
+                    else if (window.innerWidth < 1024) setVisibleCount(2);
+                    else setVisibleCount(3);
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                window.addEventListener('resize', handleResize);
+                handleResize(); 
+                
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                    window.removeEventListener('resize', handleResize);
+                };
+            }, []);
+
+            useEffect(() => {
+                if (isPaused) return;
+                const timer = setInterval(() => {
+                    nextPress();
+                }, 3000); 
+                return () => clearInterval(timer);
+            }, [pressIndex, isPaused, DATA.press.length, visibleCount]);
+
+            const nextPress = () => {
+                setPressIndex((prev) => (prev + 1) % DATA.press.length);
+            };
+
+            const prevPress = () => {
+                setPressIndex((prev) => (prev - 1 + DATA.press.length) % DATA.press.length);
+            };
+
+            const handleCopy = (text, id) => {
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                setCopiedId(id);
+                setTimeout(() => setCopiedId(null), 2000);
+            };
+
+            const SectionHeading = ({ children, icon }) => (
+                <div className="flex items-center gap-4 mb-12">
+                    <div className="p-3 rounded-2xl bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                        <Icon name={icon} size={24} />
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white uppercase">{children}</h2>
+                </div>
+            );
+
+            const handleImageClick = (imageSrc) => {
+                setSelectedImage(imageSrc);
+                setShowModal(true);
+            };
+
+            const closeModal = () => {
+                setShowModal(false);
+                setTimeout(() => setSelectedImage(null), 300);
+            };
+
+            const ImageModal = () => {
+                if (!showModal) return null;
+                return (
+                    <div 
+                        className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${showModal ? 'bg-black/70 opacity-100' : 'bg-black/0 opacity-0 pointer-events-none'}`}
+                        onClick={closeModal}
+                    >
+                        <div 
+                            className={`relative max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden transform transition-all duration-300 ${showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button 
+                                onClick={closeModal}
+                                className="absolute top-6 right-6 z-10 p-3 bg-white dark:bg-slate-800 rounded-full hover:bg-blue-600 hover:text-white transition-colors shadow-lg"
+                            >
+                                <Icon name="x" size={24} />
+                            </button>
+                            <img 
+                                src={selectedImage} 
+                                alt="Popup" 
+                                className="w-full h-full object-contain"
+                            />
+                        </div>
+                    </div>
+                );
+            };
+
+            return (
+                <div className={`${darkMode ? 'dark' : ''} min-h-screen transition-colors duration-300`}>
+                    <div className="bg-slate-50 dark:bg-[#0a0a0c] text-slate-900 dark:text-slate-100 font-sans selection:bg-blue-500 selection:text-white">
+                        <ImageModal />
+                        
+                        <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#0a0a0c]/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">V</div>
+                                    <div className="font-bold text-lg tracking-tighter flex flex-col leading-none">
+                                        <span>VIJAYACHANDAR</span>
+                                        <span className="text-blue-600 uppercase tracking-tighter">SANIKAL</span>
+                                    </div>
+                                </div>
+
+                                <div className="hidden md:flex items-center gap-2 overflow-x-auto no-scrollbar max-w-[75%]">
+                                    {['home', 'about', 'experience', 'boards', 'awards', 'press', 'speaking', 'judging', 'research', 'skills'].map((item) => (
+                                        <a key={item} href={`#${item}`} 
+                                           className={`text-[9px] font-black uppercase tracking-widest transition-colors hover:text-blue-500 whitespace-nowrap px-2 ${activeSection === item ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500'}`}>
+                                            {item === 'research' ? 'Papers' : item === 'judging' ? 'Judging' : item === 'boards' ? 'Boards' : item === 'awards' ? 'Awards' : item}
+                                        </a>
+                                    ))}
+                                    <div className="h-4 w-px bg-slate-200 dark:bg-slate-800 shrink-0 mx-1"></div>
+                                    <button onClick={() => setDarkMode(!darkMode)} className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-colors shrink-0">
+                                        <Icon name={darkMode ? "sun" : "moon"} size={16} />
+                                    </button>
+                                </div>
+                            </div>
+                        </nav>
+
+                        <section id="home" className="pt-40 pb-20 px-6">
+                            <div className="max-w-7xl mx-auto">
+                                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                                    <div>
+                                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold mb-8 uppercase tracking-widest">
+                                            <Icon name="zap" size={14} className="mr-2" /> AI & Thermal Systems Leader
+                                        </div>
+                                        <h1 className="text-5xl lg:text-7xl font-black mb-6 leading-[1.05] tracking-tight uppercase text-slate-900 dark:text-white">Transforming <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-400">Sustainable Mobility</span></h1>
+                                        <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-xl leading-relaxed font-medium">{DATA.summary}</p>
+                                        <div className="flex gap-4"><a href="#about" className="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold uppercase text-xs tracking-widest shadow-xl shadow-blue-500/20">Read Bio</a></div>
+                                    </div>
+                                    <div className="relative">
+                                        <div className="w-full aspect-[4/5] rounded-[3.5rem] bg-slate-200 dark:bg-white/5 overflow-hidden shadow-2xl relative flex items-center justify-center">
+                                            <img src={DATA.headshotUrl} alt={DATA.name} className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-700" />
+                                        </div>
+                                        <div className="absolute -bottom-8 -left-8 bg-white dark:bg-slate-900 p-8 rounded-[2rem] shadow-2xl border border-slate-100 dark:border-white/10">
+                                            <div className="text-4xl font-black text-blue-600">20+</div>
+                                            <div className="text-[10px] uppercase font-bold text-slate-500 tracking-widest mt-1">Years Innovation</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="about" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-white dark:bg-white/[0.01]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="info">Biography</SectionHeading>
+                                <div className="grid lg:grid-cols-12 gap-16">
+                                    <div className="lg:col-span-7 space-y-8">
+                                        <div className="space-y-6">
+                                            <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{DATA.biography.text}</p>
+                                            <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">{DATA.biography.pedigree}</p>
+                                        </div>
+                                        <div className="pt-10 border-t border-slate-100 dark:border-white/5">
+                                            <div className="flex items-center gap-3 mb-6 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em]"><Icon name="target" size={16} /> Professional Vision</div>
+                                            <div className="relative p-10 bg-slate-900 dark:bg-blue-600 text-white rounded-[3rem] shadow-2xl overflow-hidden group">
+                                                 <div className="absolute -right-10 -top-10 opacity-10 transform rotate-12 group-hover:scale-110 transition-transform duration-700"><Icon name="terminal" size={200} /></div>
+                                                 <Icon name="quote" size={48} className="text-white/20 mb-6" />
+                                                 <p className="text-xl md:text-2xl font-bold leading-relaxed italic">{DATA.biography.vision}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="lg:col-span-5">
+                                        <div className="sticky top-32">
+                                            <div className="p-8 bg-slate-50 dark:bg-white/[0.03] rounded-[2.5rem] border border-slate-100 dark:border-white/5">
+                                                <h4 className="text-xs font-black text-blue-600 uppercase tracking-[0.2em] mb-6">Expertise Highlights</h4>
+                                                <ul className="space-y-4">
+                                                    {["Virtual Vehicle Calibration & CAE", "Agentic AI & ML Integration", "Embedded Systems Software Testing", "Cloud-Based Simulation (HPC)", "Strategic Product Leadership"].map((item, i) => (
+                                                        <li key={i} className="flex items-start gap-3 text-sm font-bold text-slate-700 dark:text-slate-300">
+                                                            <Icon name="check-circle" size={18} className="text-blue-500 shrink-0 mt-0.5" />{item}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="experience" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-[#08080a]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="briefcase">Professional Record</SectionHeading>
+                                <div className="space-y-12">
+                                    {DATA.experience.map((job, idx) => (
+                                        <div key={idx} className="relative pl-10 border-l-2 border-slate-200 dark:border-white/10 group">
+                                            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-600 group-hover:scale-150 transition-transform"></div>
+                                            <div className="bg-white dark:bg-white/[0.03] p-10 rounded-[2.5rem] border border-slate-100 dark:border-white/5 hover:border-blue-500/30 transition-all">
+                                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                                                    <div><h3 className="text-2xl font-black uppercase tracking-tight text-slate-900 dark:text-white">{job.company}</h3><p className="text-blue-600 dark:text-blue-400 font-bold text-sm mt-1 uppercase">{job.role}</p></div>
+                                                    <span className="text-xs font-bold px-4 py-2 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-500 shadow-sm self-start">{job.period}</span>
+                                                </div>
+                                                <p className="text-slate-600 dark:text-slate-400 leading-relaxed max-w-4xl text-lg font-medium">{job.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="boards" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-white dark:bg-[#0a0a0c]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="landmark">Boards & Memberships</SectionHeading>
+                                <div className="space-y-24">
+                                    <div>
+                                        <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-8">
+                                            <Icon name="shield" size={14} /> Advisory Board Member
+                                        </div>
+                                        <div className="grid grid-cols-1 gap-6">
+                                            {DATA.memberships.advisory.map((item, idx) => (
+                                                <div key={idx} className="flex flex-col sm:flex-row items-center gap-8 p-6 bg-slate-50 dark:bg-white/[0.03] rounded-[2.5rem] border border-slate-100 dark:border-white/5 shadow-sm group hover:border-blue-500/30 transition-all">
+                                                    <div className="w-full sm:w-1/3 aspect-[16/9] rounded-[2rem] overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onClick={() => handleImageClick(item.img)}>
+                                                        <img src={item.img} alt={item.org} className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <a href={item.link} target="_blank" rel="noreferrer" className="font-bold text-2xl mb-1 leading-tight text-slate-900 dark:text-white hover:text-blue-500 transition-colors uppercase">{item.org}</a>
+                                                        <div className="text-[12px] font-black text-blue-600 uppercase italic mb-3 tracking-widest">{item.role}</div>
+                                                        <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{item.detail}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-8">
+                                            <Icon name="cpu" size={14} /> Technical & Standards
+                                        </div>
+                                        <div className="grid grid-cols-1 gap-6">
+                                            {DATA.memberships.technical.map((item, idx) => (
+                                                <div key={idx} className="flex flex-col sm:flex-row items-center gap-8 p-6 bg-slate-50 dark:bg-white/[0.03] rounded-[2.5rem] border border-slate-100 dark:border-white/5 shadow-sm group hover:border-blue-500/30 transition-all">
+                                                    <div className="w-full sm:w-1/3 aspect-[16/9] rounded-[2rem] overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onClick={() => handleImageClick(item.img)}>
+                                                        <img src={item.img} alt={item.org} className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <a href={item.link} target="_blank" rel="noreferrer" className="font-bold text-2xl mb-1 leading-tight text-slate-900 dark:text-white hover:text-blue-500 transition-colors uppercase">{item.org}</a>
+                                                        <div className="text-[12px] font-black text-blue-600 uppercase italic mb-3 tracking-widest">{item.role}</div>
+                                                        <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{item.detail}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-8">
+                                            <Icon name="check-circle" size={14} /> Societies & Honors
+                                        </div>
+                                        <div className="grid grid-cols-1 gap-6">
+                                            {DATA.memberships.fellowship.map((item, idx) => (
+                                                <div key={idx} className="flex flex-col sm:flex-row items-center gap-8 p-6 bg-slate-50 dark:bg-white/[0.03] rounded-[2.5rem] border border-slate-100 dark:border-white/5 shadow-sm group hover:border-blue-500/30 transition-all">
+                                                    <div className="w-full sm:w-1/3 aspect-[16/9] rounded-[2rem] overflow-hidden bg-slate-200 dark:bg-slate-800 relative flex items-center justify-center cursor-pointer" onClick={() => handleImageClick(item.img)}>
+                                                        <img src={item.img} alt={item.org} className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+                                                        <div className="absolute top-4 right-4 text-yellow-500/50 group-hover:text-yellow-500 transition-colors">
+                                                            <Icon name="award" size={24} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <a href={item.link} target="_blank" rel="noreferrer" className="font-bold text-2xl mb-1 leading-tight text-slate-900 dark:text-white hover:text-blue-500 transition-colors uppercase">{item.org}</a>
+                                                        <div className="text-[12px] font-black text-blue-600 uppercase italic mb-3 tracking-widest">{item.role}</div>
+                                                        <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{item.detail}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="awards" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/[0.01]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="medal">Awards & Recognition</SectionHeading>
+                                <div className="grid md:grid-cols-2 gap-8">
+                                    {DATA.awards.map((award, idx) => (
+                                        <div key={idx} className="group bg-white dark:bg-white/[0.03] rounded-[2.5rem] overflow-hidden border border-slate-100 dark:border-white/5 hover:border-blue-500/30 transition-all flex flex-col sm:flex-row shadow-sm">
+                                            <div className="w-full sm:w-2/5 aspect-video sm:aspect-auto overflow-hidden bg-slate-200 dark:bg-slate-800 relative flex items-center justify-center cursor-pointer" onClick={() => handleImageClick(award.img)}>
+                                                <img src={award.img} alt={award.title} className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 transition-all duration-700" />
+                                                <div className="absolute inset-0 flex items-center justify-center opacity-10"><Icon name="file-check" size={64} /></div>
+                                            </div>
+                                            <div className="p-8 sm:w-3/5 flex flex-col justify-center">
+                                                <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2"><Icon name="award" size={12} className="inline mr-1" /> {award.date}</div>
+                                                <a href={award.link} target="_blank" rel="noreferrer" className="text-xl font-bold mb-3 uppercase text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors hover:underline">{award.title}</a>
+                                                <div className="text-[11px] font-black text-slate-500 uppercase mb-3">{award.org}</div>
+                                                <p className="text-sm text-slate-500 font-medium italic leading-relaxed">"{award.detail}"</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section 
+                            id="press" 
+                            className="py-32 px-6 bg-white dark:bg-[#08080a] border-y border-slate-200 dark:border-white/5 mx-4 my-10 rounded-[4rem] overflow-hidden"
+                            onMouseEnter={() => setIsPaused(true)}
+                            onMouseLeave={() => setIsPaused(false)}
+                        >
+                            <div className="max-w-7xl mx-auto text-slate-900 dark:text-white">
+                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+                                    <SectionHeading icon="newspaper">Media Coverage</SectionHeading>
+                                    <div className="flex gap-4">
+                                        <button onClick={prevPress} className="p-4 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500 transition-all text-slate-500">
+                                            <Icon name="chevron-left" size={20} />
+                                        </button>
+                                        <button onClick={nextPress} className="p-4 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-blue-500 transition-all text-slate-500">
+                                            <Icon name="chevron-right" size={20} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="relative overflow-hidden">
+                                    <div 
+                                        className="flex transition-transform duration-700 ease-in-out" 
+                                        style={{ transform: `translateX(-${(pressIndex * (100 / visibleCount))}%)` }}
+                                    >
+                                        {DATA.press.map((item, idx) => (
+                                            <div key={idx} className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3 group">
+                                                <div className="bg-slate-50 dark:bg-white/[0.03] backdrop-blur-sm p-2 rounded-[2.5rem] border border-slate-200 dark:border-white/10 hover:border-blue-500/50 transition-all shadow-sm h-full flex flex-col">
+                                                    <div className="w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 bg-slate-200 dark:bg-slate-800 relative flex items-center justify-center">
+                                                        <img src={DATA.headshotUrl} alt={item.source} className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 transition-all duration-700" />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                                                        <div className="absolute bottom-6 left-6">
+                                                            <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">{item.source}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="px-6 pb-8 flex-1 flex flex-col justify-between">
+                                                        <h4 className="text-xl font-bold mb-6 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase leading-tight">{item.title}</h4>
+                                                        <div className="flex items-center justify-between mt-auto">
+                                                            <span className="text-xs font-bold text-slate-500">{item.date}</span>
+                                                            <a href={item.link} className="flex items-center gap-2 text-[10px] font-black uppercase text-blue-600 dark:text-blue-400">Read <Icon name="chevron-right" size={14} /></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="speaking" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-white dark:bg-white/[0.01]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="mic-2">Invited Speaker</SectionHeading>
+                                <div className="mb-20">
+                                    <div className="flex items-center gap-3 mb-8 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em]"><Icon name="hash" size={16} /> Keynote Engagements</div>
+                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                        {DATA.speaking.keynote.map((speak, idx) => (
+                                            <div key={idx} className="group bg-white dark:bg-white/[0.03] rounded-[2.5rem] overflow-hidden border border-slate-100 dark:border-white/5 hover:border-blue-500/30 transition-all shadow-sm">
+                                                <div className="aspect-video overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onClick={() => handleImageClick(speak.img)}>
+                                                    <img src={speak.img} alt={speak.event} className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 transition-all duration-700" />
+                                                </div>
+                                                <div className="p-8">
+                                                    <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">{speak.title}</div>
+                                                    <a href={speak.link} target="_blank" rel="noreferrer" className="text-lg font-bold mb-4 uppercase text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors hover:underline inline-block">{speak.event}</a>
+                                                    <div className="text-xs font-bold text-slate-500 tracking-widest uppercase">{speak.date}</div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="flex items-center gap-3 mb-8 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em]"><Icon name="message-square" size={16} /> Panel Contributions</div>
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        {DATA.speaking.panel.map((speak, idx) => (
+                                            <div key={idx} className="group flex flex-col md:flex-row bg-white dark:bg-white/[0.03] rounded-[2.5rem] overflow-hidden border border-slate-100 dark:border-white/5 hover:border-blue-500/30 transition-all shadow-sm">
+                                                <div className="w-full md:w-1/3 aspect-square md:aspect-auto overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onClick={() => handleImageClick(speak.img)}>
+                                                    <img src={speak.img} alt={speak.event} className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 transition-all duration-700" />
+                                                </div>
+                                                <div className="p-8 flex flex-col justify-center">
+                                                    <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">{speak.title}</div>
+                                                    <a href={speak.link} target="_blank" rel="noreferrer" className="text-lg font-bold mb-3 uppercase leading-tight text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors hover:underline">{speak.event}</a>
+                                                    <p className="text-sm text-slate-500 font-medium mb-3 italic leading-relaxed">{speak.detail}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="judging" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-[#08080a]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="scale">Judging & Peer Review</SectionHeading>
+                                <div className="mb-16">
+                                    <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-6"><Icon name="presentation" size={14} /> Invited Conference Roles</div>
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        {DATA.judging.conferenceRoles.map((item, idx) => (
+                                            <div key={idx} className="p-8 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-[2.5rem] group hover:bg-blue-600 hover:text-white transition-all duration-500 flex items-center justify-between shadow-lg">
+                                                <div>
+                                                    <h4 className="font-black text-2xl uppercase leading-none">{item.org}</h4>
+                                                    <div className="text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:text-white uppercase mt-2">{item.role}</div>
+                                                </div>
+                                                <div className="text-xs font-bold opacity-60 uppercase">{item.detail}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="grid md:grid-cols-2 gap-12 mb-16">
+                                    <div>
+                                        <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-6"><Icon name="flag" size={14} /> Competition Judging</div>
+                                        <div className="space-y-4">
+                                            {DATA.judging.competitions.map((item, idx) => (
+                                                <div key={idx} className="p-6 bg-white dark:bg-white/[0.03] rounded-[2rem] border border-slate-100 dark:border-white/5 flex items-center gap-4 group">
+                                                    <div className="p-3 bg-blue-500/10 rounded-xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                                        <Icon name="scale" size={18} />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-lg leading-tight uppercase text-slate-900 dark:text-white">{item.org}</h4>
+                                                        <div className="text-[10px] font-bold text-slate-500 uppercase">{item.detail}</div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-6"><Icon name="rocket" size={14} /> Hackathon Judging</div>
+                                        <div className="space-y-4">
+                                            {DATA.judging.hackathons.map((item, idx) => (
+                                                <div key={idx} className="p-6 bg-white dark:bg-white/[0.03] rounded-[2rem] border border-slate-100 dark:border-white/5 flex items-center gap-4 group">
+                                                    <div className="p-3 bg-indigo-500/10 rounded-xl text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                                        <Icon name="cpu" size={18} />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-lg leading-tight uppercase text-slate-900 dark:text-white">{item.org}</h4>
+                                                        <div className="text-[10px] font-bold text-slate-500 uppercase">{item.detail}</div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="mb-16">
+                                    <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-6"><Icon name="pen-tool" size={14} /> Journal Review Panel</div>
+                                    <div className="grid md:grid-cols-3 gap-4">
+                                        {DATA.judging.journals.map((item, idx) => (
+                                            <div key={idx} className="p-6 bg-white dark:bg-white/[0.03] rounded-[2rem] border border-slate-100 dark:border-white/5 shadow-sm hover:border-blue-500 transition-all">
+                                                <h4 className="font-bold text-lg leading-tight text-slate-900 dark:text-white">{item.org}</h4>
+                                                <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest italic mt-2">{item.detail}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="flex items-center gap-2 text-blue-600 font-black uppercase text-[12px] tracking-[0.3em] mb-6"><Icon name="calendar" size={14} /> Conference Peer Review</div>
+                                    <div className="grid md:grid-cols-4 gap-4">
+                                        {DATA.judging.peerReview.map((item, idx) => (
+                                            <div key={idx} className="p-6 bg-white dark:bg-white/[0.03] rounded-[2rem] border border-slate-100 dark:border-white/5 shadow-sm hover:border-blue-500 transition-all">
+                                                <h4 className="font-bold text-sm leading-tight uppercase text-slate-900 dark:text-white">{item.org}</h4>
+                                                <div className="text-[9px] font-bold text-slate-500 uppercase mt-1 italic">{item.detail}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="research" className="py-32 px-6 border-t border-slate-100 dark:border-white/5 bg-white dark:bg-[#0a0a0c]">
+                            <div className="max-w-7xl mx-auto">
+                                <SectionHeading icon="book-open">Publications</SectionHeading>
+                                <div className="space-y-6">
+                                    {DATA.publications.map((pub, idx) => (
+                                        <div key={idx} className="bg-slate-100/40 dark:bg-white/[0.03] p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 group hover:shadow-2xl hover:border-blue-500/30 transition-all duration-300 shadow-sm">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-3 mb-4"><span className="text-[10px] font-bold bg-blue-600 text-white px-2 py-0.5 rounded uppercase tracking-tighter">Peer Reviewed</span><span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{pub.date} • {pub.journal}</span></div>
+                                                <h4 className="text-xl md:text-2xl font-black mb-4 text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors uppercase leading-tight">{pub.title}</h4>
+                                                <div className="text-xs font-mono text-slate-500 flex items-center gap-2 uppercase tracking-widest"><Icon name="hash" size={12} className="text-blue-600" /> DOI: {pub.doi}</div>
+                                            </div>
+                                            <div className="flex gap-3 w-full md:w-auto">
+                                                <button onClick={() => handleCopy(pub.cite, idx)} className="flex-1 md:flex-none px-8 py-3 border border-slate-200 dark:border-white/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-white dark:hover:bg-blue-600 hover:text-blue-600 dark:hover:text-white transition-all flex items-center justify-center gap-2 text-slate-500">
+                                                    {copiedId === idx ? <Icon name="clipboard-check" size={16} className="text-green-500" /> : <Icon name="quote" size={16} />}{copiedId === idx ? "Copied" : "Cite"}
+                                                </button>
+                                                <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noreferrer" className="p-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-2xl hover:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-lg"><Icon name="external-link" size={20} /></a>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <footer id="skills" className="py-32 px-6 bg-slate-50 dark:bg-[#050505] border-t border-slate-100 dark:border-white/5">
+                            <div className="max-w-7xl mx-auto mb-20">
+                                <SectionHeading icon="cpu">Technical Proficiency</SectionHeading>
+                                <div className="grid md:grid-cols-3 gap-12">
+                                    <div><h4 className="text-xs font-black text-slate-500 mb-6 uppercase tracking-[0.3em]">Engineering & CAE</h4><div className="flex flex-wrap gap-2">{DATA.skills.engineering.map(s => (<span key={s} className="px-4 py-2 rounded-xl bg-white dark:bg-blue-900/20 text-slate-700 dark:text-blue-300 text-xs font-bold uppercase border border-slate-200 dark:border-transparent tracking-tighter">{s}</span>))}</div></div>
+                                    <div><h4 className="text-xs font-black text-slate-500 mb-6 uppercase tracking-[0.3em]">AI & Cloud Tech</h4><div className="flex flex-wrap gap-2">{DATA.skills.tech.map(s => (<span key={s} className="px-4 py-2 rounded-xl bg-white dark:bg-indigo-900/20 text-slate-700 dark:text-indigo-300 text-xs font-bold uppercase border border-slate-200 dark:border-transparent tracking-tighter">{s}</span>))}</div></div>
+                                    <div><h4 className="text-xs font-black text-slate-500 mb-6 uppercase tracking-[0.3em]">Strategic Leadership</h4><div className="flex flex-wrap gap-2">{DATA.skills.management.map(s => (<span key={s} className="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase border border-slate-200 dark:border-transparent tracking-tighter">{s}</span>))}</div></div>
+                                </div>
+                            </div>
+                            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-slate-100 dark:border-white/5">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">V</div>
+                                    <div className="font-black text-xl tracking-tighter uppercase text-slate-900 dark:text-white">VIJAYACHANDAR <span className="text-blue-600">SANIKAL</span></div>
+                                </div>
+                                <div className="flex gap-6">
+                                    <a href="#" className="p-3 bg-white dark:bg-[#1a1a1c] rounded-xl hover:bg-blue-600 hover:text-white transition-all text-slate-500 shadow-sm border border-slate-100 dark:border-transparent"><Icon name="linkedin" size={22} /></a>
+                                    <a href="#" className="p-3 bg-white dark:bg-[#1a1a1c] rounded-xl hover:bg-blue-600 hover:text-white transition-all text-slate-500 shadow-sm border border-slate-100 dark:border-transparent"><Icon name="mail" size={22} /></a>
+                                </div>
+                                <div className="text-[10px] font-black uppercase text-slate-500 tracking-widest">© 2026 SENIOR MEMBER IEEE</div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
