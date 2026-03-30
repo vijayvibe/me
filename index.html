@@ -363,7 +363,7 @@
                 if (isPaused) return;
                 const timer = setInterval(() => {
                     nextPress();
-                }, 3000); 
+                }, 2000); // auto advance every 2 seconds
                 return () => clearInterval(timer);
             }, [pressIndex, isPaused, DATA.press.length, visibleCount]);
 
